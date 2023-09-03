@@ -22,6 +22,9 @@ public class RewiredIM : MonoBehaviour
 
     private Animator animator;
 
+    private Ledge activeLedge;
+    private bool onLedge;
+
     private void Awake()
     {
         player = ReInput.players.GetPlayer(playerId);
@@ -72,6 +75,17 @@ public class RewiredIM : MonoBehaviour
 
 
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void GrabLedge(GameObject handpos, Ledge currentLedge)
+    {
+        controller.enabled = false;
+        onLedge = true;
+        // animator
+        //      grab ledge true
+        //      jumping true
+        transform.position = handpos.transform.position;
+        activeLedge = currentLedge;
     }
 
     IEnumerator StopAnim(string anim, bool value, float waitTime)
